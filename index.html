@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NAMI NGIYA SPINA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: #fff;
+      color: #000;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .icon {
+      height: 160px;
+      max-width: 300px;
+      background-color: #ffffff;
+      padding: 0.2rem;
+      filter: contrast(110%) brightness(105%);
+    }
+
+    .icons span {
+      font-size: 1.6rem;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    /* --- MENU STYLING --- */
+    .menu-wrapper {
+      position: relative;
+    }
+
+    .menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      padding: 1em;
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      z-index: 10;
+      width: 200px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .menu-wrapper:hover .menu {
+      display: flex;
+    }
+
+    .menu li {
+      padding: 0.8rem 0;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease, font-size 0.3s ease;
+    }
+
+    .menu li:hover {
+      transform: scale(1.15);
+      font-size: 1.4rem;
+    }
+
+    .menu li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .menu li a:hover {
+      color: #e60000;
+    }
+
+    .menu-toggle {
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.7rem;
+      border: 2px solid black;
+      border-radius: 4px;
+      display: inline-block;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      border-color: #007bff; /* blue-ish border */
+      box-shadow: 0 0 10px white, 0 0 15px #007bff;
+    }
+
+    /* --- PRODUCT GRID --- */
+    .shop {
+      padding: 2rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .shop h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #222;
+      font-weight: 700;
+    }
+
+    .products-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .vertical-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #000;
+    }
+
+    .left-line {
+      left: 10%;
+    }
+
+    .right-line {
+      right: 10%;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 2rem;
+    }
+
+    .product {
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.02);
+    }
+
+    .product img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product .name {
+      margin: 1rem 0 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .promo-banner {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border: 5px solid black; /* 👈 Add this line for a thick black border */
+      box-sizing: border-box;
+    }
+
+    .promo-banner img {
+      width: 100%;
+      height: auto;
+      max-height: 230px; /* Adjusted height */
+      object-fit: cover;
+      display: block;
+    }
+
+    /* --- Search Icon and Input --- */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-container:hover .search-icon,
+.search-container:focus-within .search-icon {
+  box-shadow: 0 0 5px white, 0 0 10px #007bff;
+}
+
+.search-input {
+  position: absolute;
+  left: 2rem;
+  opacity: 0;
+  width: 0;
+  padding: 0.5rem 1rem;
+  border: 2px solid #007bff;
+  border-radius: 50px;
+  outline: none;
+  transition: all 0.4s ease;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #000;
+  z-index: 5;
+}
+
+/* When hovering on container OR input has content */
+.search-container:hover .search-input,
+.search-input:focus,
+.search-input.not-empty {
+  opacity: 1;
+  width: 200px;
+}
+
+/* When the search input has content, add the 'not-empty' class to trigger animation */
+.search-input:not(:placeholder-shown) {
+  opacity: 1;
+  width: 200px;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="menu-wrapper">
+        <div class="menu-toggle">☰</div>
+        <ul class="menu">
+          <li><a href="#">Tees</a></li>
+          <li><a href="#">Hats</a></li>
+          <li><a href="#">Tops</a></li>
+          <li><a href="#">Denim</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+
+      <img class="icon" src="logo.jpg" alt="NAMI NGIYA SPINA Logo">
+
+      <div class="icons">
+        <div class="search-container">
+          <span class="search-icon"><i class="fas fa-search"></i></span>
+          <input type="text" class="search-input" placeholder="Search products...">
+        </div>
+        
+        <span><i class="fas fa-shopping-cart"></i></span>
+      </div>
+    </div>
+  </header>
+  <section class="promo-banner">
+    <img src="Mash.jpg" alt="Promo Banner">
+  </section>
+  
+  <section class="shop">
+    <h2>Shop All</h2>
+    <div class="products-container">
+      <div class="vertical-line left-line"></div>
+      <div class="products">
+        <div class="product">
+          <img src="DenimShirt.jpg" alt="Item 1">
+          <p class="name">NamiGang Denim Shirt</p>
+        </div>
+        <div class="product">
+          <img src="Denim.jpg" alt="Item 2">
+          <p class="name">NamiGang Denim Jean & Shirt</p>
+        </div>
+        <div class="product">
+          <img src="denimG.jpg" alt="Item 3">
+          <p class="name">NamiGang Denim Shirt & Combo</p>
+        </div>
+        <div class="product">
+          <img src="SWEETY.jpg" alt="Item 4">
+          <p class="name">NamiGang Denim Combo</p>
+        </div>
+        <div class="product">
+          <img src="Tee.jpg" alt="Item 5">
+          <p class="name">NamiGang Shirt</p>
+        </div>
+        <div class="product">
+          <img src="JACK.jpg" alt="Item 6">
+          <p class="name">Spina Puffer Jacket</p>
+        </div>
+        <div class="product">
+          <img src="beanie.jpg" alt="Item 7">
+          <p class="name">NamiGang Beanie</p>
+        </div>
+        <div class="product">
+          <img src="hat.jpg" alt="Item 8">
+          <p class="name">NamiGang Denim Hat</p>
+        </div>
+      </div>
+      <div class="vertical-line right-line"></div>
+    </div>
+  </section>
+
+  <footer style="background-color: #222; color: white; text-align: center; padding: 2rem 1rem; margin-top: 3rem;">
+    <p>&copy; 2025 NAMI NGIYA SPINA. All rights reserved.</p>
+    <p>Follow us on 
+      <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank" style="color: #fff;">
+        <i class="fab fa-instagram"></i>
+      </a> 
+      <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank" style="color: #fff; margin-left: 0.5rem;">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </p>
+  </footer>
+</body>
+</html>
