@@ -15,364 +15,278 @@
     }
 
     body {
-      font-family: 'Times New Roman', Times, serif;
+      font-family: 'Montserrat', sans-serif;
       background-color: #fff;
       color: #000;
     }
 
-    /* Make header sticky */
     header {
-      background-color: #ffffff;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: center;
-      position: sticky;
+      position: fixed;
       top: 0;
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       z-index: 1000;
     }
 
-    .top-bar {
-      max-width: 1200px;
-      width: 100%;
+    .menu-toggle {
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .icons {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       gap: 1rem;
     }
 
-    .icon {
-      height: 100px;
-      max-width: 200px;
-      background-color: #ffffff;
-      padding: 0.2rem;
-      filter: contrast(110%) brightness(105%);
-      object-fit: contain;
-    }
-
-    .icons span {
-      font-size: 1.6rem;
-      margin-left: 1rem;
+    .icons i {
+      font-size: 1.5rem;
       cursor: pointer;
     }
 
-    /* --- MENU STYLING --- */
-    .menu-wrapper {
-      position: relative;
-    }
-
-    .menu {
-      position: absolute;
-      top: 100%;
+    /* Overlay Menu */
+    .overlay {
+      height: 0%;
+      width: 100%;
+      position: fixed;
+      top: 0;
       left: 0;
-      background: #ffffff;
-      padding: 1em;
-      list-style: none;
-      display: none;
-      flex-direction: column;
-      z-index: 10;
-      width: 200px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.95);
+      overflow-y: hidden;
+      transition: 0.5s;
+      z-index: 999;
     }
 
-    .menu-wrapper:hover .menu {
-      display: flex;
+    .overlay-content {
+      position: relative;
+      top: 25%;
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
     }
 
-    .menu li {
-      padding: 0.8rem 0;
-      font-size: 1.2rem;
-      transition: transform 0.3s ease, font-size 0.3s ease;
-    }
-
-    .menu li:hover {
-      transform: scale(1.15);
-      font-size: 1.4rem;
-    }
-
-    .menu li a {
+    .overlay-content a {
+      padding: 10px;
       text-decoration: none;
-      color: #000;
+      font-size: 2rem;
+      color: white;
+      display: block;
+      transition: 0.3s;
       font-weight: 600;
-      transition: color 0.3s;
     }
 
-    .menu li a:hover {
+    .overlay-content a:hover {
       color: #e60000;
     }
 
-    .menu-toggle {
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0.5rem 0.7rem;
-      border: 2px solid black;
-      border-radius: 4px;
-      display: inline-block;
-      transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-
-    .menu-toggle:hover {
-      border-color: #007bff;
-      box-shadow: 0 0 10px white, 0 0 15px #007bff;
-    }
-
-    /* --- SEARCH --- */
-    .search-container {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-icon {
-      font-size: 1.6rem;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 50%;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .search-container:hover .search-icon,
-    .search-container:focus-within .search-icon {
-      box-shadow: 0 0 5px white, 0 0 10px #007bff;
-    }
-
-    .search-input {
-      
+    .overlay .closebtn {
       position: absolute;
-      left: 2rem;
-      opacity: 0;
-      width: 0;
-      padding: 0.5rem 1rem;
-      border: 2px solid #007bff;
-      border-radius: 50px;
-      outline: none;
-      transition: all 0.4s ease;
-      font-size: 1rem;
-      background-color: #fff;
-      color: #000;
-      z-index: 5;
+      top: 20px;
+      right: 35px;
+      font-size: 3rem;
+      cursor: pointer;
     }
 
-    .search-container:hover .search-input,
-    .search-input:focus,
-    .search-input.not-empty {
-      opacity: 1;
-      width: 200px;
-    }
-
-    .search-input:not(:placeholder-shown) {
-      opacity: 1;
-      width: 200px;
-    }
-
-    /* --- PROMO BANNER --- */
-    .promo-banner {
-      width: 100%;
-      overflow: hidden;
-      margin-bottom: 2rem;
-      border: 5px solid black;
-      box-sizing: border-box;
+    /* Main content */
+    .main {
+      margin-top: 90px;
+      padding: 2rem 1rem;
+      text-align: center;
     }
 
     .promo-banner img {
       width: 100%;
       height: auto;
-      max-height: 230px;
-      object-fit: cover;
-      display: block;
+      border: 5px solid black;
     }
 
-    /* --- SHOP SECTION --- */
-    .shop {
-      padding: 2rem 1rem;
-      text-align: center;
-      position: relative;
-    }
-
-    .shop h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      color: #222;
-      font-weight: 700;
-    }
-
-    .products-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      position: relative;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .vertical-line {
-      display: none; /* Hide lines on mobile/tablet */
+    h2 {
+      margin: 2rem 0;
+      font-size: 2rem;
+      font-weight: bold;
     }
 
     .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      align-items: center;
     }
 
     .product {
-      background: #f9f9f9;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-
-    .product:hover {
-      transform: scale(1.02);
+      max-width: 300px;
+      text-align: center;
     }
 
     .product img {
       width: 100%;
-      height: 230px;
-      object-fit: cover;
       border-radius: 10px;
     }
 
     .product .name {
       margin: 1rem 0 0.5rem;
+      font-size: 1.2rem;
       font-weight: 600;
+    }
+
+    .product .price {
+      margin-bottom: 1rem;
       font-size: 1rem;
+      font-weight: 500;
       color: #333;
     }
 
+    .colors {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .color-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid #000;
+    }
+
+    .view-all {
+      margin: 3rem auto 0;
+      padding: 1rem 2rem;
+      background-color: black;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
     footer {
-      background-color: #222;
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      background-color: #000;
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
     }
 
     footer a {
-      color: #fff;
-      margin-left: 0.5rem;
+      color: white;
+      margin: 0 0.5rem;
     }
 
-    /* --- MEDIA QUERIES --- */
-    @media (max-width: 768px) {
-      .top-bar {
-        flex-direction: column;
-      }
-
-      .menu {
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-      }
-
+    @media(min-width: 768px) {
       .products {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
-      .promo-banner img {
-        max-height: 180px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .icon {
-        height: 80px;
-      }
-
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .product img {
-        height: 200px;
+      .product {
+        margin: 1rem;
       }
     }
-
   </style>
 </head>
+
 <body>
 
-  <header>
-    <div class="top-bar">
-      <div class="menu-wrapper">
-        <div class="menu-toggle">☰</div>
-        <ul class="menu">
-          <li><a href="#">Tees</a></li>
-          <li><a href="#">Hats</a></li>
-          <li><a href="#">Tops</a></li>
-          <li><a href="#">Denim</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">About</a></li>
-        </ul>
-      </div>
+<header>
+  <span class="menu-toggle" onclick="openNav()">&#9776;</span>
+  <img src="logo.jpg" alt="Logo" class="logo">
+  <div class="icons">
+    <i class="fas fa-search"></i>
+    <i class="fas fa-shopping-bag"></i>
+  </div>
+</header>
 
-      <img class="icon" src="logo.jpg" alt="NAMI NGIYA SPINA Logo">
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="#">T-Shirts</a>
+    <a href="#">Hats</a>
+    <a href="#">Tops</a>
+    <a href="#">Denim</a>
+    <a href="#">Terms</a>
+    <a href="#">About</a>
+  </div>
+</div>
 
-      <div class="icons">
-        <div class="search-container">
-          <span class="search-icon"><i class="fas fa-search"></i></span>
-          <input type="text" class="search-input" placeholder="Search products...">
-        </div>
-        <span><i class="fas fa-shopping-cart"></i></span>
-      </div>
-    </div>
-  </header>
+<div class="main">
 
   <section class="promo-banner">
     <img src="Mash.jpg" alt="Promo Banner">
   </section>
 
-  <section class="shop">
-    <h2>Shop All</h2>
-    <div class="products-container">
-      <div class="products">
-        <div class="product">
-          <img src="DenimShirt.jpg" alt="Item 1">
-          <p class="name">NamiGang Denim Shirt</p>
-        </div>
-        <div class="product">
-          <img src="Denim.jpg" alt="Item 2">
-          <p class="name">NamiGang Denim Jean & Shirt</p>
-        </div>
-        <div class="product">
-          <img src="denimG.jpg" alt="Item 3">
-          <p class="name">NamiGang Denim Shirt & Combo</p>
-        </div>
-        <div class="product">
-          <img src="SWEETY.jpg" alt="Item 4">
-          <p class="name">NamiGang Denim Combo</p>
-        </div>
-        <div class="product">
-          <img src="Tee.jpg" alt="Item 5">
-          <p class="name">NamiGang Shirt</p>
-        </div>
-        <div class="product">
-          <img src="JACK.jpg" alt="Item 6">
-          <p class="name">Spina Puffer Jacket</p>
-        </div>
-        <div class="product">
-          <img src="beanie.jpg" alt="Item 7">
-          <p class="name">NamiGang Beanie</p>
-        </div>
-        <div class="product">
-          <img src="hat.jpg" alt="Item 8">
-          <p class="name">NamiGang Denim Hat</p>
-        </div>
+  <h2>Shop All</h2>
+
+  <div class="products">
+    <div class="product">
+      <img src="DenimShirt.jpg" alt="Product 1">
+      <p class="name">NamiGang Denim Shirt</p>
+      <p class="price">R 699.99</p>
+      <div class="colors">
+        <div class="color-circle" style="background-color: black;"></div>
+        <div class="color-circle" style="background-color: lightgray;"></div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <p>&copy; 2025 NAMI NGIYA SPINA. All rights reserved.</p>
-    <p>Follow us on 
-      <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank"><i class="fab fa-instagram"></i></a> 
-      <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
-    </p>
-  </footer>
+    <div class="product">
+      <img src="Denim.jpg" alt="Product 2">
+      <p class="name">Denim Jean & Shirt</p>
+      <p class="price">R 799.99</p>
+      <div class="colors">
+        <div class="color-circle" style="background-color: blue;"></div>
+        <div class="color-circle" style="background-color: white;"></div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="denimG.jpg" alt="Product 3">
+      <p class="name">Denim Combo</p>
+      <p class="price">R 999.99</p>
+      <div class="colors">
+        <div class="color-circle" style="background-color: darkblue;"></div>
+        <div class="color-circle" style="background-color: gray;"></div>
+      </div>
+    </div>
+
+    <!-- Add more products if you want -->
+
+  </div>
+
+  <a href="#" class="view-all">VIEW ALL PRODUCTS</a>
+
+</div>
+
+<footer>
+  <p>&copy; 2025 NAMI NGIYA SPINA. All rights reserved.</p>
+  <p>Follow us on 
+    <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank">
+      <i class="fab fa-facebook"></i>
+    </a>
+  </p>
+</footer>
+
+<script>
+function openNav() {
+  document.getElementById("myNav").style.height = "100%";
+}
+function closeNav() {
+  document.getElementById("myNav").style.height = "0%";
+}
+</script>
 
 </body>
 </html>
