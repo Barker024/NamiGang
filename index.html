@@ -20,12 +20,16 @@
       color: #000;
     }
 
+    /* Make header sticky */
     header {
       background-color: #ffffff;
       padding: 1rem 2rem;
       border-bottom: 1px solid #ddd;
       display: flex;
       justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .top-bar {
@@ -35,15 +39,15 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      position: relative;
     }
 
     .icon {
-      height: 160px;
-      max-width: 300px;
+      height: 100px;
+      max-width: 200px;
       background-color: #ffffff;
       padding: 0.2rem;
       filter: contrast(110%) brightness(105%);
+      object-fit: contain;
     }
 
     .icons span {
@@ -109,11 +113,76 @@
     }
 
     .menu-toggle:hover {
-      border-color: #007bff; /* blue-ish border */
+      border-color: #007bff;
       box-shadow: 0 0 10px white, 0 0 15px #007bff;
     }
 
-    /* --- PRODUCT GRID --- */
+    /* --- SEARCH --- */
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .search-container:hover .search-icon,
+    .search-container:focus-within .search-icon {
+      box-shadow: 0 0 5px white, 0 0 10px #007bff;
+    }
+
+    .search-input {
+      position: absolute;
+      left: 2rem;
+      opacity: 0;
+      width: 0;
+      padding: 0.5rem 1rem;
+      border: 2px solid #007bff;
+      border-radius: 50px;
+      outline: none;
+      transition: all 0.4s ease;
+      font-size: 1rem;
+      background-color: #fff;
+      color: #000;
+      z-index: 5;
+    }
+
+    .search-container:hover .search-input,
+    .search-input:focus,
+    .search-input.not-empty {
+      opacity: 1;
+      width: 200px;
+    }
+
+    .search-input:not(:placeholder-shown) {
+      opacity: 1;
+      width: 200px;
+    }
+
+    /* --- PROMO BANNER --- */
+    .promo-banner {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border: 5px solid black;
+      box-sizing: border-box;
+    }
+
+    .promo-banner img {
+      width: 100%;
+      height: auto;
+      max-height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* --- SHOP SECTION --- */
     .shop {
       padding: 2rem 1rem;
       text-align: center;
@@ -130,32 +199,22 @@
     .products-container {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       position: relative;
+      flex-wrap: wrap;
+      gap: 2rem;
     }
 
     .vertical-line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background-color: #000;
-    }
-
-    .left-line {
-      left: 10%;
-    }
-
-    .right-line {
-      right: 10%;
+      display: none; /* Hide lines on mobile/tablet */
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      max-width: 800px;
-      margin: 0 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px;
     }
 
     .product {
@@ -172,7 +231,7 @@
 
     .product img {
       width: 100%;
-      height: 250px;
+      height: 230px;
       object-fit: cover;
       border-radius: 10px;
     }
@@ -184,76 +243,58 @@
       color: #333;
     }
 
-    .promo-banner {
-      width: 100%;
-      overflow: hidden;
-      margin-bottom: 2rem;
-      border: 5px solid black; /* 👈 Add this line for a thick black border */
-      box-sizing: border-box;
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
     }
 
-    .promo-banner img {
-      width: 100%;
-      height: auto;
-      max-height: 230px; /* Adjusted height */
-      object-fit: cover;
-      display: block;
+    footer a {
+      color: #fff;
+      margin-left: 0.5rem;
     }
 
-    /* --- Search Icon and Input --- */
-.search-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+    /* --- MEDIA QUERIES --- */
+    @media (max-width: 768px) {
+      .top-bar {
+        flex-direction: column;
+      }
 
-.search-icon {
-  font-size: 1.6rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: box-shadow 0.3s ease;
-}
+      .menu {
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+      }
 
-.search-container:hover .search-icon,
-.search-container:focus-within .search-icon {
-  box-shadow: 0 0 5px white, 0 0 10px #007bff;
-}
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
 
-.search-input {
-  position: absolute;
-  left: 2rem;
-  opacity: 0;
-  width: 0;
-  padding: 0.5rem 1rem;
-  border: 2px solid #007bff;
-  border-radius: 50px;
-  outline: none;
-  transition: all 0.4s ease;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #000;
-  z-index: 5;
-}
+      .promo-banner img {
+        max-height: 180px;
+      }
+    }
 
-/* When hovering on container OR input has content */
-.search-container:hover .search-input,
-.search-input:focus,
-.search-input.not-empty {
-  opacity: 1;
-  width: 200px;
-}
+    @media (max-width: 480px) {
+      .icon {
+        height: 80px;
+      }
 
-/* When the search input has content, add the 'not-empty' class to trigger animation */
-.search-input:not(:placeholder-shown) {
-  opacity: 1;
-  width: 200px;
-}
+      .products {
+        grid-template-columns: 1fr;
+      }
 
+      .product img {
+        height: 200px;
+      }
+    }
 
   </style>
 </head>
 <body>
+
   <header>
     <div class="top-bar">
       <div class="menu-wrapper">
@@ -275,19 +316,18 @@
           <span class="search-icon"><i class="fas fa-search"></i></span>
           <input type="text" class="search-input" placeholder="Search products...">
         </div>
-        
         <span><i class="fas fa-shopping-cart"></i></span>
       </div>
     </div>
   </header>
+
   <section class="promo-banner">
     <img src="Mash.jpg" alt="Promo Banner">
   </section>
-  
+
   <section class="shop">
     <h2>Shop All</h2>
     <div class="products-container">
-      <div class="vertical-line left-line"></div>
       <div class="products">
         <div class="product">
           <img src="DenimShirt.jpg" alt="Item 1">
@@ -322,20 +362,16 @@
           <p class="name">NamiGang Denim Hat</p>
         </div>
       </div>
-      <div class="vertical-line right-line"></div>
     </div>
   </section>
 
-  <footer style="background-color: #222; color: white; text-align: center; padding: 2rem 1rem; margin-top: 3rem;">
+  <footer>
     <p>&copy; 2025 NAMI NGIYA SPINA. All rights reserved.</p>
     <p>Follow us on 
-      <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank" style="color: #fff;">
-        <i class="fab fa-instagram"></i>
-      </a> 
-      <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank" style="color: #fff; margin-left: 0.5rem;">
-        <i class="fab fa-facebook"></i>
-      </a>
+      <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank"><i class="fab fa-instagram"></i></a> 
+      <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
     </p>
   </footer>
+
 </body>
 </html>
