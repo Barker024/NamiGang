@@ -24,18 +24,19 @@
     }
 
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #fff; /* White background */
-      color: #000;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  color: #000;
+  padding: 1.5rem 2rem; /* increased from 1rem to 1.5rem */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 
     .menu-toggle {
       font-size: 1.8rem;
@@ -43,8 +44,10 @@
     }
 
     .logo {
-      height: 45px;
-    }
+  height: 70px;
+  object-fit: contain;
+}
+
 
     .icons {
       display: flex;
@@ -102,17 +105,17 @@
 
     /* Main content */
     .main {
-      margin-top: 90px;
+      margin-top: 100px;
       padding: 1rem;
       text-align: center;
     }
 
     .promo-banner img {
-      width: 100%;
-      height: 50%;
-       /* Smaller height */
-      object-fit: cover;
-    }
+  width: 100%;
+  height: 40vh; /* 40% of the viewport height */
+  object-fit: cover;
+}
+
 
     h2 {
       margin: 2rem 0 1rem;
@@ -298,5 +301,6 @@ function closeNav() {
 
 </body>
 </html>
+
 
 
