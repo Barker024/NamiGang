@@ -25,6 +25,33 @@
   display: flex;
   flex-direction: column;
 }
+.icon-menu {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 90px; /* push it below header */
+}
+
+.icon-menu a {
+  font-size: 2rem;
+  color: #000;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.icon-menu a:hover {
+  color: #e60000;
+}
+
+.promo-banner img {
+  width: 100%;
+  max-height: 500px; /* Set maximum banner height for PC */
+  object-fit: cover;
+}
+
 
 .sidebar a {
   padding: 1rem;
@@ -235,14 +262,15 @@
 <body>
 
 <header>
-  <div class="sidebar">
-    <a href="#"><i class="fas fa-tshirt"></i> Tees</a>
-    <a href="#"><i class="fas fa-hat-cowboy"></i> Hats</a>
-    <a href="#"><i class="fas fa-hoodie"></i> Tops</a>
-    <a href="#"><i class="fas fa-user-tie"></i> Denim</a>
-    <a href="#"><i class="fas fa-book"></i> Terms</a>
-    <a href="#"><i class="fas fa-info-circle"></i> About</a>
+  <div class="icon-menu">
+    <a href="#"><i class="fas fa-tshirt"></i></a>  <!-- T-shirt -->
+    <a href="#">🧢</a>  <!-- Cap emoji -->
+    <a href="#"><i class="fas fa-user-secret"></i></a> <!-- Hoodie fallback -->
+    <a href="#">👖</a> <!-- Pants emoji -->
+    <a href="#"><i class="fas fa-book"></i></a> <!-- Terms -->
+    <a href="#"><i class="fas fa-info-circle"></i></a> <!-- About -->
   </div>
+  
   
   <img src="logo.jpg" alt="Logo" class="logo">
   <div class="icons">
@@ -251,17 +279,6 @@
   </div>
 </header>
 
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="overlay-content">
-    <a href="#" onclick="closeNav()">T-Shirts</a>
-    <a href="#" onclick="closeNav()">Hats</a>
-    <a href="#" onclick="closeNav()">Tops</a>
-    <a href="#" onclick="closeNav()">Denim</a>
-    <a href="#" onclick="closeNav()">Terms</a>
-    <a href="#" onclick="closeNav()">About</a>
-  </div>
-</div>
 
 <div class="main">
 
