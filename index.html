@@ -437,6 +437,27 @@
 .banner {
   animation: bannerFadeIn 1.2s ease-out;
 }
+.product-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.product-tabs .tab {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+
+.product-tabs .tab:hover {
+  background-color: #333;
+  color: #fff;
+}
 
   </style>
 
@@ -672,7 +693,22 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="Mash.jpg" alt="Promo Banner">
   </section>
 
-  <h2>New Arrivals</h2>
+  <h2>New Arrivals</<section class="new-releases">
+  <h2>New Releases</h2>
+
+  <!-- Tabs for product categories -->
+  <div class="product-tabs">
+    <a href="tshirts.html" class="tab">T-Shirts</a>
+    <a href="hoods.html" class="tab">Hoods</a>
+    <a href="bottoms.html" class="tab">Bottoms</a>
+  </div>
+
+  <!-- Existing products can stay here if needed -->
+  <div class="products">
+    <!-- Your product items go here -->
+  </div>
+</section>
+
 
   <div class="products">
     <div class="product">
