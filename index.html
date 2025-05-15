@@ -444,24 +444,63 @@
   gap: 15px;
 }
 
+/* Wrapper for horizontal scroll on mobile */
+.product-nav-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.product-nav-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+/* Flexbox row */
 .product-nav {
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin: 20px 0;
+  gap: 25px;
+  padding: 10px 20px;
+  width: max-content;
 }
 
+/* Icon styles */
 .nav-icon {
-  font-size: 32px;
+  font-size: 28px;
   color: #555;
-  transition: transform 0.3s ease, opacity 0.3s ease;
   text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.6;
 }
 
+/* Grow effect and z-index on hover */
 .nav-icon:hover {
   transform: scale(1.4);
-  z-index: 2;
-  color: #e60023; /* example highlight color */
+  opacity: 1;
+  z-index: 3;
+  color: #e60023;
+}
+
+/* Tooltip label on hover */
+.nav-icon::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Show label only when hovering */
+.nav-icon:hover::after {
+  opacity: 1;
 }
 
 .product-nav .nav-icon:not(:hover) {
@@ -722,17 +761,31 @@ document.addEventListener("DOMContentLoaded", () => {
     
     <section class="new-releases"
   <!-- Icon-based nav bar -->
+  <div class="product-nav-wrapper">
   <div class="product-nav">
-    <a href="tshirts.html" class="nav-icon" title="T-Shirts">
-      <i class="fas fa-shirt"></i>
-    </a>
-    <a href="hoods.html" class="nav-icon" title="Hoods">
-      <i class="fas fa-hood-cloak"></i>
-    </a>
-    <a href="bottoms.html" class="nav-icon" title="Bottoms">
-      <i class="fas fa-pants"></i>
-    </a>
-  </div>
+  <a href="tshirts.html" class="nav-icon" title="T-Shirts">
+    <i class="fas fa-shirt"></i>
+  </a>
+  <a href="hoods.html" class="nav-icon" title="Hoods">
+    <i class="fas fa-user-hood"></i>
+  </a>
+  <a href="bottoms.html" class="nav-icon" title="Bottoms">
+    <i class="fas fa-user"></i>
+  </a>
+  <a href="jersey.html" class="nav-icon" title="Jersey">
+    <i class="fas fa-futbol"></i> <!-- Jersey representation -->
+  </a>
+  <a href="denim.html" class="nav-icon" title="Denim">
+    <i class="fas fa-user-tie"></i> <!-- Best available substitute -->
+  </a>
+  <a href="hat.html" class="nav-icon" title="Hat">
+    <i class="fas fa-hat-cowboy"></i>
+  </a>
+  <a href="socks.html" class="nav-icon" title="Socks">
+    <i class="fas fa-socks"></i>
+  </a>
+</div>
+</div>
 </section>
 
 
