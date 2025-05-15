@@ -444,6 +444,31 @@
   gap: 15px;
 }
 
+.product-nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.nav-icon {
+  font-size: 32px;
+  color: #555;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-icon:hover {
+  transform: scale(1.4);
+  z-index: 2;
+  color: #e60023; /* example highlight color */
+}
+
+.product-nav .nav-icon:not(:hover) {
+  opacity: 0.6;
+}
+
+
 .product-tabs .tab {
   padding: 10px 20px;
   background-color: #f0f0f0;
@@ -694,20 +719,22 @@ document.addEventListener("DOMContentLoaded", () => {
   </section>
 
   <h2>New Arrivals</<section class="new-releases">
-  <h2>New Releases</h2>
-
-  <!-- Tabs for product categories -->
-  <div class="product-tabs">
-    <a href="tshirts.html" class="tab">T-Shirts</a>
-    <a href="hoods.html" class="tab">Hoods</a>
-    <a href="bottoms.html" class="tab">Bottoms</a>
-  </div>
-
-  <!-- Existing products can stay here if needed -->
-  <div class="products">
-    <!-- Your product items go here -->
+    
+    <section class="new-releases"
+  <!-- Icon-based nav bar -->
+  <div class="product-nav">
+    <a href="tshirts.html" class="nav-icon" title="T-Shirts">
+      <i class="fas fa-shirt"></i>
+    </a>
+    <a href="hoods.html" class="nav-icon" title="Hoods">
+      <i class="fas fa-hood-cloak"></i>
+    </a>
+    <a href="bottoms.html" class="nav-icon" title="Bottoms">
+      <i class="fas fa-pants"></i>
+    </a>
   </div>
 </section>
+
 
 
   <div class="products">
