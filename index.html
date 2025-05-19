@@ -544,6 +544,71 @@
   display: block;
   border-radius: 10px;
 }
+.video-hero {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-hero .video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.video-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+}
+
+.promo-subtitle {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.promo-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.promo-btn {
+  background-color: white;
+  color: black;
+  padding: 12px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.promo-btn:hover {
+  background-color: #ddd;
+}
+
+/* Responsive Text Sizes */
+@media (min-width: 768px) {
+  .promo-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .promo-title {
+    font-size: 3rem;
+  }
+}
 
   </style>
 
@@ -780,14 +845,17 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="Mash.jpg" alt="Promo Banner">
   </section>
   
-  <section class="promo-video-section">
-  <div class="video-wrapper">
-    <video controls autoplay muted loop playsinline>
-      <source src="videos/8975b7a7-b687-4332-b244-419d89e02dc9.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+ <section class="video-hero">
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="Promo.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay">
+    <h2 class="promo-subtitle">EXCLUSIVE DROP</h2>
+    <h1 class="promo-title">WATCH THE HYPE IN ACTION</h1>
+    <a href="#shop" class="promo-btn">SHOP NOW</a>
   </div>
 </section>
+
     
     <section class="new-releases" </section>
 
@@ -890,8 +958,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
-
-
-
-
-
