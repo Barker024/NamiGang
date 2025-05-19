@@ -619,83 +619,6 @@
   }
 }
 
-.category-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-}
-
-.category-card {
-  position: relative;
-  height: 280px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 14px;
-  overflow: hidden;
-  text-decoration: none;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  transition: transform 0.3s ease;
-}
-
-.category-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 60%);
-  z-index: 1;
-  transition: opacity 0.3s ease;
-}
-
-.category-title {
-  position: relative;
-  z-index: 2;
-  color: white;
-  font-size: 1.8rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-  opacity: 1;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.category-card:hover {
-  transform: scale(1.02);
-}
-
-.category-card:hover .category-title {
-  transform: translateY(-5px);
-  opacity: 1;
-}
-
-@media (min-width: 768px) {
-  .category-grid {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .category-card {
-    flex: 1 1 calc(48% - 10px);
-    height: 300px;
-  }
-}
-@media (max-width: 768px) {
-  .category-grid {
-    display: flex;
-    overflow-x: auto;
-    gap: 14px;
-    scroll-snap-type: x mandatory;
-    padding: 10px 16px;
-  }
-
-  .category-card {
-    min-width: 80%;
-    scroll-snap-align: start;
-  }
-}
 
   </style>
 
@@ -993,24 +916,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   </div>
-
-  <section class="category-grid">
-  <a href="#hoodies" class="category-card" style="background-image: url('images/hoodies.jpg');">
-    <h2 class="category-title">HOODIES</h2>
-  </a>
-  <a href="#sweaters" class="category-card" style="background-image: url('Gman.jpg');">
-    <h2 class="category-title">SWEATERS</h2>
-  </a>
-  <a href="#tshirts" class="category-card" style="background-image: url('DenimShirt.jpg');">
-    <h2 class="category-title">T-SHIRTS</h2>
-  </a>
-  <a href="#denim" class="category-card" style="background-image: url('denimG.jpg');">
-    <h2 class="category-title">DENIM</h2>
-  </a>
-  <a href="#jackets" class="category-card" style="background-image: url('JACK.jpg');">
-    <h2 class="category-title">JACKETS</h2>
-  </a>
-</section>
 
 <a href="#" class="view-all">VIEW ALL PRODUCTS</a>
 
