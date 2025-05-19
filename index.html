@@ -522,6 +522,28 @@
   background-color: #333;
   color: #fff;
 }
+.promo-video-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 15px;
+  background: #f9f9f9;
+}
+
+.video-wrapper {
+  width: 100%;
+  max-width: 960px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
 
   </style>
 
@@ -539,6 +561,7 @@
   function closeNav() {
     document.getElementById("myNav").style.height = "0%";
   }
+  
 </script>
 
 
@@ -756,6 +779,15 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="promo-banner">
     <img src="Mash.jpg" alt="Promo Banner">
   </section>
+  
+  <section class="promo-video-section">
+  <div class="video-wrapper">
+    <video controls autoplay muted loop playsinline>
+      <source src="videos/8975b7a7-b687-4332-b244-419d89e02dc9.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
     
     <section class="new-releases" </section>
 
