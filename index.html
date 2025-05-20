@@ -619,6 +619,167 @@
   }
 }
 
+.category-highlights {
+  padding: 2rem 1rem;
+  background: #fff;
+}
+.section-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.category-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.category-card {
+  position: relative;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.category-card:hover {
+  transform: scale(1.03);
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  width: 100%;
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.shop-the-look {
+  padding: 2rem 1rem;
+  background-color: #f7f7f7;
+}
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+.look-card {
+  min-width: 250px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+.look-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.look-info {
+  padding: 1rem;
+  text-align: center;
+}
+.look-info h3 {
+  margin-bottom: 0.5rem;
+}
+.shop-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+.shop-button:hover {
+  background-color: #333;
+}
+.featured-drop {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.drop-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.drop-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 80%;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.drop-content h2 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.drop-content p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.drop-button {
+  background: #fff;
+  color: #000;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s;
+}
+
+.drop-button:hover {
+  background: #000;
+  color: #fff;
+}
+
 
   </style>
 
@@ -639,6 +800,18 @@
   
 </script>
 
+<script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function showNextSlide() {
+    slides[slideIndex].classList.remove('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+  }
+
+  setInterval(showNextSlide, 4000); // change every 4 seconds
+</script>
 
 <body>
 
@@ -916,6 +1089,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   </div>
+
+<section class="featured-drop">
+  <div class="drop-slider">
+    <div class="slide active" style="background-image: url('Ski1.jpg');"></div>
+    <div class="slide" style="background-image: url('Ski2.jpg');"></div>
+    <div class="slide" style="background-image: url('Ski3.jpg');"></div>
+  </div>
+  <div class="drop-content">
+    <h2>THE MID-YEAR DROP</h2>
+    <p>Fresh cuts. Limited stock. Style reset.</p>
+    <a href="#" class="drop-button">Explore Now</a>
+  </div>
+</section>
+
 
 <a href="#" class="view-all">VIEW ALL PRODUCTS</a>
 
