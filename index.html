@@ -956,34 +956,6 @@ function bounceCartCounter() {
     function saveCart() {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
-    
-   function checkout() {
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-
-  let message = "🛍️ Hello, I'd like to order:\n";
-  let total = 0;
-
-  cart.forEach(item => {
-    message += `- ${item.name} x${item.quantity} (R${item.price.toFixed(2)})\n`;
-    total += item.price * item.quantity;
-  });
-
-  message += `\nTotal: R${total.toFixed(2)}`;
-  const whatsappURL = `https://wa.me/27672667557?text=${encodeURIComponent(message)}`;
-
-  window.open(whatsappURL, '_blank');
-
-  // Clear cart after checkout
-  cart = [];
-  saveCart();
-  updateCartCount();
-  closeCartPopup();
-}
-
-   
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateCartDisplay();
@@ -1041,9 +1013,9 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 
 
-    <section class="new-releases" </section>
+<section class="new-releases">
+  <h2>New Arrivals</h2>
 
- <h2>New Arrivals</<section class="new-releases">
 
   <div class="products">
     <div class="product">
