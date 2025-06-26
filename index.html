@@ -779,6 +779,9 @@
   background: #000;
   color: #fff;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 
   </style>
@@ -886,16 +889,22 @@ function checkout() {
   let message = "🛍️ Hello, I'd like to order:\n";
   let total = 0;
 
-  cartItems.forEach((item, index) => {
-  const itemDiv = document.createElement('div');
-  itemDiv.classList.add('cart-item');
-  itemDiv.innerHTML = `
-    <span>${item.name}</span>
-    <span>R${item.price.toFixed(2)}</span>
-    <button class="remove-item" onclick="removeFromCart(${index})">🗑️</button>
-  `;
-  cartItemsDiv.appendChild(itemDiv);
-});
+  cart.forEach((item) => {
+    message += `\n${item.quantity} x ${item.name} - R${(item.price * item.quantity).toFixed(2)}`;
+    total += item.price * item.quantity;
+  });
+
+  message += `\n\nTotal: R${total.toFixed(2)}`;
+
+  const whatsappURL = `https://wa.me/27672667557?text=${encodeURIComponent(message)}`;
+  window.open(whatsappURL, '_blank');
+
+  cart = [];
+  saveCart();
+  updateCartCount();
+  closeCartPopup();
+}
+
 
 function removeFromCart(index) {
   cart.splice(index, 1);
@@ -904,17 +913,6 @@ function removeFromCart(index) {
   updateCartDisplay();
 }
 
-
-  message += `\nTotal: R${total.toFixed(2)}`;
-  const whatsappURL = `https://wa.me/27672667557?text=${encodeURIComponent(message)}`;
-
-  window.open(whatsappURL, '_blank');
-
-  cart = [];
-  saveCart();
-  updateCartCount();
-  closeCartPopup();
-}
 
 function clearCart() {
   cart = [];
@@ -927,15 +925,6 @@ function updateCartCount() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   document.getElementById('cart-counter').innerText = totalItems;
 }
-
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  saveCart();
-  updateCartDisplay();
-  updateCartCount();
-}
-
 
 // Show the toast
 function showToast() {
@@ -957,10 +946,17 @@ function bounceCartCounter() {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-  updateCartDisplay();
-});
+  const slides = document.querySelectorAll('.slide');
+  let slideIndex = 0;
 
+  function showNextSlide() {
+    slides[slideIndex].classList.remove('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+  }
+
+  setInterval(showNextSlide, 4000);
+});
 
     </script>
 
@@ -1013,8 +1009,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 
 
-<section class="new-releases">
-  <h2>New Arrivals</h2>
+<section class="new-releases" id="shop">
+
 
 
   <div class="products">
