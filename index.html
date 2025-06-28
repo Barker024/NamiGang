@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,9 +6,8 @@
   <title>NAMI NGIYA SPINA</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
-    * {
+       * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -412,16 +410,24 @@
   transform: scale(1.2);
 }
 .overlay {
-  height: 0%; /* default hidden */
-  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  height: 100%;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.95);
   overflow-y: hidden;
-  transition: 0.5s;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
   z-index: 999;
 }
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 @keyframes bannerFadeIn {
   0% {
@@ -586,6 +592,18 @@
   font-size: 1.2rem;
   letter-spacing: 2px;
   margin-bottom: 10px;
+}
+.cart-popup {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cart-popup.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .promo-title {
@@ -780,234 +798,58 @@
   color: #fff;
 }
 
+#liveResults div.result-item {
+  background: white;
+  color: black;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#liveResults div.result-item:hover {
+  background-color: #f0f0f0;
+}
+
+#liveResults div.result-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+#liveResults div.result-item span.product-name {
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+#liveResults div.result-item span.product-price {
+  font-weight: 500;
+  color: #e60000;
+  white-space: nowrap;
+}
 
   </style>
-
 </head>
-<script>
-  function toggleMenu() {
-    const overlay = document.getElementById("myNav");
-    if (overlay.style.height === "100%") {
-      overlay.style.height = "0%";
-    } else {
-      overlay.style.height = "100%";
-    }
-  }
-
-  function closeNav() {
-    document.getElementById("myNav").style.height = "0%";
-  }
-  
-</script>
-
-<script>
-  let slideIndex = 0;
-  const slides = document.querySelectorAll('.slide');
-
-  function showNextSlide() {
-    slides[slideIndex].classList.remove('active');
-    slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add('active');
-  }
-
-  setInterval(showNextSlide, 4000); // change every 4 seconds
-</script>
-
 <body>
-
-  <script>
-
-    
-  function addToCart(name, price) {
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      cart.push({ name, price, quantity: 1 });
-    }
-    saveCart();
-    updateCartCount();
-    bounceCartCounter();
-    showToast();
-  }
-
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-updateCartCount();
-
-function openCartPopup() {
-  updateCartDisplay();
-  const popup = document.getElementById('cart-popup');
-  popup.style.display = 'flex';
-  setTimeout(() => popup.classList.add('show'), 10);
-}
-
-function closeCartPopup() {
-  const popup = document.getElementById('cart-popup');
-  popup.classList.remove('show');
-  setTimeout(() => popup.style.display = 'none', 300);
-}
-
-
-function updateCartDisplay() {
-  const cartItemsDiv = document.getElementById('cart-items');
-  const cartTotal = document.getElementById('cart-total');
-  cartItemsDiv.innerHTML = '';
-
-  let total = 0;
-
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
-  } else {
-    cart.forEach((item, index) => {
-      const itemTotal = item.price * item.quantity;
-      total += itemTotal;
-
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('cart-item');
-      itemDiv.innerHTML = `
-        <span>${item.name} x${item.quantity}</span>
-        <span>R${itemTotal.toFixed(2)}</span>
-        <button class="remove-item" onclick="removeFromCart(${index})">🗑️</button>
-      `;
-      cartItemsDiv.appendChild(itemDiv);
-    });
-  }
-
-  cartTotal.innerText = `Total: R${total.toFixed(2)}`;
-}
-
-
-function checkout() {
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-
-  let message = "🛍️ Hello, I'd like to order:\n";
-  let total = 0;
-
-  cartItems.forEach((item, index) => {
-  const itemDiv = document.createElement('div');
-  itemDiv.classList.add('cart-item');
-  itemDiv.innerHTML = `
-    <span>${item.name}</span>
-    <span>R${item.price.toFixed(2)}</span>
-    <button class="remove-item" onclick="removeFromCart(${index})">🗑️</button>
-  `;
-  cartItemsDiv.appendChild(itemDiv);
-});
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  saveCart();
-  updateCartCount();
-  updateCartDisplay();
-}
-
-
-  message += `\nTotal: R${total.toFixed(2)}`;
-  const whatsappURL = `https://wa.me/27672667557?text=${encodeURIComponent(message)}`;
-
-  window.open(whatsappURL, '_blank');
-
-  cart = [];
-  saveCart();
-  updateCartCount();
-  closeCartPopup();
-}
-
-function clearCart() {
-  cart = [];
-  saveCart();
-  updateCartCount();
-  closeCartPopup();
-}
-
-function updateCartCount() {
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.getElementById('cart-counter').innerText = totalItems;
-}
-
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  saveCart();
-  updateCartDisplay();
-  updateCartCount();
-}
-
-
-// Show the toast
-function showToast() {
-  var toast = document.getElementById("toast");
-  toast.className = "show";
-  setTimeout(function() { toast.className = toast.className.replace("show", ""); }, 3000);
-}
-
-// Bounce the cart counter
-function bounceCartCounter() {
-  var counter = document.getElementById("cart-counter");
-  counter.classList.add("bounce");
-  setTimeout(() => {
-    counter.classList.remove("bounce");
-  }, 500);
-}
-    
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    
-   function checkout() {
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
-    return;
-  }
-
-  let message = "🛍️ Hello, I'd like to order:\n";
-  let total = 0;
-
-  cart.forEach(item => {
-    message += `- ${item.name} x${item.quantity} (R${item.price.toFixed(2)})\n`;
-    total += item.price * item.quantity;
-  });
-
-  message += `\nTotal: R${total.toFixed(2)}`;
-  const whatsappURL = `https://wa.me/27672667557?text=${encodeURIComponent(message)}`;
-
-  window.open(whatsappURL, '_blank');
-
-  // Clear cart after checkout
-  cart = [];
-  saveCart();
-  updateCartCount();
-  closeCartPopup();
-}
-
-   
-document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-  updateCartDisplay();
-});
-
-
-    </script>
 
 <header>
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
-
   <img src="logo.jpg" alt="Logo" class="logo">
   <div class="icons">
-    <i class="fas fa-search"></i>
+    <i class="fas fa-search" onclick="openSearch()"></i>
     <div style="position: relative;">
       <div class="cart-icon" onclick="openCartPopup()">
-  <i class="fas fa-shopping-bag"></i>
-  <span id="cart-counter" class="cart-counter">0</span>
-</div>
-
-</div>
-
+        <i class="fas fa-bag-shopping"></i>
+        <span id="cart-counter" class="cart-counter">0</span>
+      </div>
+    </div>
   </div>
-
 </header>
 
 <div id="myNav" class="overlay">
@@ -1022,92 +864,92 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
-<div class="main">
+<div id="searchOverlay" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeSearch()">&times;</a>
+  <div class="overlay-content">
+    <div style="width: 80%; max-width: 500px; margin: auto;">
+      <input type="text" id="searchBox" placeholder="SEARCH..."
+        style="width: 100%; padding: 15px 20px; font-size: 1.5rem; border-radius: 8px; border: none;">
+      <div id="liveResults" style="margin-top: 20px; max-height: 50vh; overflow-y: auto;"></div>
+    </div>
+  </div>
+</div>
 
+<div class="main">
   <section class="promo-banner">
     <img src="Mash.jpg" alt="Promo Banner">
   </section>
-  
- <section class="video-hero">
-  <div class="video-dark-overlay"></div>
-  <video class="video-bg" autoplay muted loop playsinline preload="auto">
-    <source src="Promo.mp4" type="video/mp4">
-  </video>
-  <div class="video-overlay">
-    <h2 class="promo-subtitle">EXCLUSIVE DROP</h2>
-    <h1 class="promo-title">WATCH THE HYPE IN ACTION</h1>
-    <a href="#shop" class="promo-btn">SHOP NOW</a>
-  </div>
-</section>
 
+  <section class="video-hero">
+    <div class="video-dark-overlay"></div>
+    <video class="video-bg" autoplay muted loop playsinline preload="auto">
+      <source src="Promo.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay">
+      <h2 class="promo-subtitle">EXCLUSIVE DROP</h2>
+      <h1 class="promo-title">WATCH THE HYPE IN ACTION</h1>
+      <a href="#shop" class="promo-btn">SHOP NOW</a>
+    </div>
+  </section>
 
-    <section class="new-releases" </section>
-
- <h2>New Arrivals</<section class="new-releases">
-
-  <div class="products">
-    <div class="product">
-      <img src="DenimShirt.jpg" alt="Product 1">
-      <p class="name">NamiGang Denim Shirt</p>
-      <p class="price">R699.99</p>
-      <div class="colors">
-        <div class="color-circle" style="background-color: black;"></div>
-        <div class="color-circle" style="background-color: lightgray;"></div>
+  <section class="new-releases">
+    <h2>New Arrivals</h2>
+    <div class="products">
+      <div class="product">
+        <img src="DenimShirt.jpg" alt="Product 1">
+        <p class="name">NamiGang Denim Shirt</p>
+        <p class="price">R699.99</p>
+        <div class="colors">
+          <div class="color-circle" style="background-color: black;"></div>
+          <div class="color-circle" style="background-color: lightgray;"></div>
+        </div>
+        <button class="add-to-cart" onclick="addToCart('NamiGang Denim Shirt', 699.99)">
+          <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
+        </button>
       </div>
-      <button class="add-to-cart" onclick="addToCart('NamiGang Denim Shirt', 699.99)">
-        <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
-      </button>
+      <div class="product">
+        <img src="Denim.jpg" alt="Product 2">
+        <p class="name">Denim Jean & Shirt</p>
+        <p class="price">R799.99</p>
+        <div class="colors">
+          <div class="color-circle" style="background-color: blue;"></div>
+          <div class="color-circle" style="background-color: white;"></div>
+        </div>
+        <button class="add-to-cart" onclick="addToCart('Denim Jean & Shirt', 799.99)">
+          <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
+        </button>
+      </div>
+      <div class="product">
+        <img src="denimG.jpg" alt="Product 3">
+        <p class="name">Denim Combo</p>
+        <p class="price">R999.99</p>
+        <div class="colors">
+          <div class="color-circle" style="background-color: darkblue;"></div>
+          <div class="color-circle" style="background-color: gray;"></div>
+        </div>
+        <button class="add-to-cart" onclick="addToCart('Denim Combo', 999.99)">
+          <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-drop">
+    <div class="drop-slider">
+      <div class="slide active" style="background-image: url('Ski2.jpg');"></div>
+      <div class="slide" style="background-image: url('Ski2.jpg');"></div>
+      <div class="slide" style="background-image: url('Ski3.jpg');"></div>
+    </div>
+    <div class="drop-content">
+      <h2>THE MID-YEAR DROP</h2>
+      <p>Fresh cuts. Limited stock. Style reset.</p>
+      <a href="#" class="drop-button">Explore Now</a>
+    </div>
+  </section>
+
+  <a href="#" class="view-all">VIEW ALL PRODUCTS</a>
 </div>
 
-<div class="product">
-  <img src="Denim.jpg" alt="Product 2">
-  <p class="name">Denim Jean & Shirt</p>
-  <p class="price">R799.99</p>
-  <div class="colors">
-    <div class="color-circle" style="background-color: blue;"></div>
-    <div class="color-circle" style="background-color: white;"></div>
-  </div>
-  <button class="add-to-cart" onclick="addToCart('Denim Jean & Shirt', 799.99)">
-    <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
-  </button>
-</div>
-
-<div class="product">
-  <img src="denimG.jpg" alt="Product 3">
-  <p class="name">Denim Combo</p>
-  <p class="price">R999.99</p>
-  <div class="colors">
-    <div class="color-circle" style="background-color: darkblue;"></div>
-    <div class="color-circle" style="background-color: gray;"></div>
-  </div>
-  <button class="add-to-cart" onclick="addToCart('Denim Jean & Shirt', 799.99)">
-    <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
-  </button>
-</div>
-
-<!-- More products can go here -->
-
-
-  </div>
-
-<section class="featured-drop">
-  <div class="drop-slider">
-    <div class="slide active" style="background-image: url('Ski2.jpg');"></div>
-    <div class="slide" style="background-image: url('Ski2.jpg');"></div>
-    <div class="slide" style="background-image: url('Ski3.jpg');"></div>
-  </div>
-  <div class="drop-content">
-    <h2>THE MID-YEAR DROP</h2>
-    <p>Fresh cuts. Limited stock. Style reset.</p>
-    <a href="#" class="drop-button">Explore Now</a>
-  </div>
-</section>
-
-
-<a href="#" class="view-all">VIEW ALL PRODUCTS</a>
-
-</div>
-<!-- Mini Cart Popup -->
 <div id="cart-popup" class="cart-popup">
   <div class="cart-header">
     <h2>Your Cart</h2>
@@ -1123,36 +965,129 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
-
 <footer>
-
   <p>&copy; 2025 NAMI NGIYA SPINA.</p>
   <p>Follow us on 
-    <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank">
-      <i class="fab fa-facebook"></i>
-    </a>
+    <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
   </p>
 </footer>
 
-<script>
-function openNav() {
-  document.getElementById("myNav").style.height = "100%";
-}
-function closeNav() {
-  document.getElementById("myNav").style.height = "0%";
-}
-document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-  updateCartDisplay();
-});
-
-</script>
-
 <div id="toast">Item Added to Cart</div>
 
-</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  updateCartCount();
+  updateCartDisplay();
 
+  // SEARCH FUNCTION
+  document.getElementById("searchBox").addEventListener("input", function() {
+    const query = this.value.toLowerCase();
+    const liveResults = document.getElementById("liveResults");
+    let output = "";
+
+    if (!query) { liveResults.innerHTML = ""; return; }
+
+    let matches = 0;
+    document.querySelectorAll(".product").forEach(product => {
+      const name = product.querySelector(".name").innerText.toLowerCase();
+      if (name.includes(query)) {
+        const pname = product.querySelector(".name").innerText;
+        const pprice = product.querySelector(".price").innerText;
+        const pimg = product.querySelector("img").src;
+        output += `<div class="result-item" onclick="goToProduct('${pname}')">
+                    <img src="${pimg}"><div><strong>${pname}</strong><br>${pprice}</div></div>`;
+        matches++;
+      }
+    });
+    liveResults.innerHTML = matches ? output : "<p style='color:white;'>No products found.</p>";
+  });
+
+  window.toggleMenu = () => { toggleOverlay('myNav'); };
+  window.openSearch = () => { toggleOverlay('searchOverlay'); };
+  window.closeNav = () => closeOverlay('myNav');
+  window.closeSearch = () => closeOverlay('searchOverlay');
+
+  function toggleOverlay(id) {
+    window.scrollTo({top:0,behavior:'smooth'});
+    const el = document.getElementById(id);
+    el.classList.toggle("open");
+    document.body.style.overflow = el.classList.contains("open") ? "hidden" : "";
+  }
+  function closeOverlay(id) {
+    document.getElementById(id).classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  window.addToCart = (name, price) => {
+    const existing = cart.find(item => item.name === name);
+    if (existing) existing.quantity += 1;
+    else cart.push({name, price, quantity:1});
+    saveCart(); updateCartCount(); updateCartDisplay(); bounceCart(); showToast();
+  };
+
+  window.openCartPopup = () => { updateCartDisplay(); document.getElementById("cart-popup").classList.add("show"); };
+  window.closeCartPopup = () => document.getElementById("cart-popup").classList.remove("show");
+  window.clearCart = () => { cart=[]; saveCart(); updateCartCount(); updateCartDisplay(); closeCartPopup(); };
+  window.checkout = () => {
+    if (!cart.length) return alert("Your cart is empty!");
+    let msg = "🛍️ Hello, I'd like to order:\n";
+    let total=0; cart.forEach(item => { msg+=`- ${item.name} x${item.quantity}\n`; total+=item.price*item.quantity; });
+    msg+=`\nTotal: R${total.toFixed(2)}`;
+    window.open(`https://wa.me/27672667557?text=${encodeURIComponent(msg)}`,"_blank");
+    cart=[]; saveCart(); updateCartCount(); closeCartPopup();
+  };
+
+  window.goToProduct = (name) => {
+    closeSearch();
+    document.querySelectorAll(".product").forEach(p => {
+      if(p.querySelector(".name").innerText===name){
+        p.scrollIntoView({behavior:"smooth",block:"center"});
+        p.style.background="#ffebeb"; setTimeout(()=>p.style.background="",1500);
+      }
+    });
+  };
+
+  function updateCartCount() {
+    document.getElementById("cart-counter").innerText = cart.reduce((s,i)=>s+i.quantity,0);
+  }
+  function updateCartDisplay() {
+    const div=document.getElementById("cart-items"); div.innerHTML="";
+    let total=0;
+    if(!cart.length) div.innerHTML="<p>Your cart is empty.</p>";
+    else cart.forEach((item,i)=>{
+      total+=item.price*item.quantity;
+      div.innerHTML+=`<div style="display:flex;justify-content:space-between;align-items:center;">
+        <span>${item.name} x${item.quantity}</span>
+        <button onclick="removeItem(${i})" style="background:none;border:none;color:#e60000;font-size:1.2rem;">🗑️</button></div>`;
+    });
+    document.getElementById("cart-total").innerText=`Total: R${total.toFixed(2)}`;
+  }
+  window.removeItem = (i) => { cart.splice(i,1); saveCart(); updateCartCount(); updateCartDisplay(); };
+  function saveCart() { localStorage.setItem('cart', JSON.stringify(cart)); }
+  function bounceCart() {
+    const el=document.getElementById("cart-counter"); el.classList.add("bounce");
+    setTimeout(()=>el.classList.remove("bounce"),500);
+  }
+  function showToast(){
+    const t=document.getElementById("toast"); t.className="show";
+    setTimeout(()=>t.className=t.className.replace("show",""),3000);
+  }
+});
+
+  document.addEventListener("DOMContentLoaded", () => {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    setInterval(() => {
+      slides[slideIndex].classList.remove('active');
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add('active');
+    }, 4000);
+  });
+
+  // Your other JS (toggleMenu, addToCart, updateCart, searchBox etc) goes here.
+
+</script>
+</body>
 </html>
