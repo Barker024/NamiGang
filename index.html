@@ -734,13 +734,17 @@
 }
 
 .developer-glow {
-  color: #e60000; /* start with red */
+  color: white;
   font-weight: bold;
   text-decoration: none;
-  animation: glow 1.5s infinite alternate;
+  transition: color 0.3s ease;
 }
 
-@keyframes glow {
+.developer-glow:hover {
+  animation: glowHover 1.5s infinite alternate;
+}
+
+@keyframes glowHover {
   0% {
     text-shadow: 0 0 5px #e60000, 0 0 10px #e60000;
     color: #e60000;
@@ -751,6 +755,7 @@
   }
 }
 
+
 .drop-slider {
   position: absolute;
   top: 0;
@@ -758,6 +763,13 @@
   height: 100%;
   width: 100%;
 }
+body {
+    opacity: 1;
+    transition: opacity 0.6s;
+  }
+  body.fade-out {
+    opacity: 0;
+  }
 
 .slide {
   position: absolute;
@@ -851,6 +863,10 @@
   color: #e60000;
   white-space: nowrap;
 }
+nav a.active {
+    color: red;
+    border-bottom: 2px solid red;
+  }
 
   </style>
 </head>
@@ -858,7 +874,7 @@
 
 <header>
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
-  <img src="logo.jpg" alt="Logo" class="logo">
+  <img src="LOG.jpeg" alt="Logo" class="logo">
   <div class="icons">
     <i class="fas fa-search" onclick="openSearch()"></i>
     <div style="position: relative;">
@@ -873,12 +889,11 @@
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
-    <a href="#" onclick="closeNav()">T-Shirts</a>
-    <a href="#" onclick="closeNav()">Hats</a>
-    <a href="#" onclick="closeNav()">Tops</a>
-    <a href="#" onclick="closeNav()">Denim</a>
-    <a href="#" onclick="closeNav()">Terms</a>
-    <a href="#" onclick="closeNav()">About</a>
+    <a href="#" onclick="closeNav()">HOME</a>
+    <a href="OurStore.html" onclick="closeNav()">OUR STORE</a>
+    <a href="#" onclick="closeNav()">ABOUT US</a>
+    <a href="#" onclick="closeNav()">CONTACT</a>
+    <a href="#" onclick="closeNav()">ACCOUNT</a>
   </div>
 </div>
 
@@ -1109,6 +1124,31 @@
       slides[slideIndex].classList.add('active');
     }, 4000);
   });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const links = document.querySelectorAll("nav a");
+    const currentUrl = window.location.href;
+    links.forEach(link => {
+      if (currentUrl.includes(link.getAttribute("href"))) {
+        link.classList.add("active");
+      }
+    });
+  });
+  
+  // Smooth page fade transition
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href.startsWith('#') && href !== 'javascript:void(0)') {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location = href;
+        }, 600); // matches the CSS transition time
+      }
+    });
+  });
+
 
   // Your other JS (toggleMenu, addToCart, updateCart, searchBox etc) goes here.
 
