@@ -12,14 +12,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        header {
-            background-color: var(--light);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
+        
         :root {
             --primary: #ff3e6c;
             --secondary: #ff7b9c;
@@ -45,26 +38,27 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
+        /* Header Styles - FIXED FOR MOBILE */
         header {
             background-color: var(--light);
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: all 0.3s ease;
         }
 
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0; /* Reduced padding */
+            padding: 8px 0; /* Reduced padding */
             position: relative;
-            min-height: 100px; /* Reduced height */
+            min-height: auto; /* Removed fixed height */
         }
 
         .menu-icon {
-            font-size: 18px; /* Smaller icon */
+            font-size: 18px;
             cursor: pointer;
             padding: 5px;
             order: 1;
@@ -80,7 +74,7 @@
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 22px; /* Smaller font size */
+            font-size: 22px;
             font-weight: 800;
             color: var(--primary);
             display: flex;
@@ -88,8 +82,8 @@
         }
 
         .logo img {
-            height: 90px; /* Smaller logo image */
-            margin-right: 10px;
+            height: 70px; /* Reduced logo size */
+            margin-right: 8px; /* Reduced spacing */
         }
 
         .logo span {
@@ -97,7 +91,7 @@
         }
 
         .search-bar {
-            flex: 0 1 350px; /* Narrower search bar */
+            flex: 0 1 350px;
             max-width: 400px;
             margin-left: auto;
             margin-right: 15px;
@@ -107,10 +101,10 @@
 
         .search-bar input {
             width: 100%;
-            padding: 8px 15px; /* More compact */
+            padding: 8px 15px;
             border: 1px solid #ddd;
             border-radius: 30px;
-            font-size: 13px; /* Smaller font */
+            font-size: 13px;
             outline: none;
         }
 
@@ -129,14 +123,14 @@
 
         .nav-icons {
             display: flex;
-            gap: 12px; /* Tighter spacing */
+            gap: 12px;
             order: 4;
         }
 
         .nav-icon {
             position: relative;
             cursor: pointer;
-            font-size: 16px; /* Smaller icons */
+            font-size: 16px;
             color: var(--dark);
         }
 
@@ -159,7 +153,7 @@
         /* Navigation */
         nav {
             background-color: var(--dark);
-            padding: 10px 0; /* Reduced padding */
+            padding: 10px 0;
         }
 
         .nav-links {
@@ -181,6 +175,23 @@
 
         .nav-links a:hover {
             color: var(--secondary);
+        }
+
+        /* Promo Banner Styles */
+        .promo-banner {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            max-height: 120px; /* Reduced height */
+            margin-top: 0;
+        }
+
+        .promo-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
         }
 
         /* Video Hero Section */
@@ -668,23 +679,6 @@
             display: block;
         }
 
-        /* Promo Banner Styles */
-        .promo-banner {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-            max-height: 150px; /* Reduced height */
-            margin-top: 0;
-        }
-
-        .promo-banner img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
         /* Class that will be added on scroll */
         .header-scrolled {
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -696,7 +690,7 @@
             overflow: hidden;
         }
 
-        /* Responsive Styles */
+        /* Responsive Styles - MOBILE OPTIMIZATION */
         @media (max-width: 992px) {
             .categories,
             .products,
@@ -707,31 +701,39 @@
 
         @media (max-width: 768px) {
             .top-header {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
+                gap: 8px;
+                padding: 8px 0;
+                min-height: auto;
             }
             
             .logo-container {
                 position: static;
                 transform: none;
                 order: 1;
-                margin-bottom: 10px;
+                margin-bottom: 0;
+                flex: 1;
+                display: flex;
+                justify-content: center;
             }
             
             .menu-icon {
                 order: 0;
-                margin-right: auto;
+                margin-right: 0;
+                align-self: center;
             }
             
             .search-bar {
-                order: 2;
-                margin: 10px 0;
+                order: 3;
+                margin: 0;
                 max-width: 100%;
-                flex: 1 1 100%;
+                flex: 0 0 100%;
+                display: none; /* Hide on mobile by default */
             }
             
             .nav-icons {
-                order: 3;
+                order: 2;
+                margin-left: auto;
             }
             
             .categories,
@@ -742,15 +744,47 @@
             
             .nav-links {
                 flex-wrap: wrap;
-                gap: 15px;
+                gap: 10px;
+                padding: 0 10px;
+            }
+            
+            .nav-links li {
+                flex: 1 0 30%;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                font-size: 12px;
             }
             
             .promo-title {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
             
             .video-hero {
-                height: 70vh;
+                height: 60vh;
+            }
+            
+            .logo img {
+                height: 50px; /* Smaller logo on mobile */
+            }
+            
+            .promo-banner {
+                max-height: 80px; /* Reduced height */
+            }
+            
+            .section-title {
+                font-size: 24px;
+                margin: 30px 0 20px;
+            }
+            
+            .category, .product {
+                height: auto;
+                aspect-ratio: 1/1.2;
+            }
+            
+            .product-img {
+                height: 180px;
             }
         }
 
@@ -759,18 +793,19 @@
             .products,
             .footer-content {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             
             .promo-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             
             .promo-subtitle {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             
             .section-title {
-                font-size: 24px;
+                font-size: 20px;
             }
             
             .cart-modal {
@@ -779,25 +814,95 @@
             }
             
             .video-hero {
-                height: 60vh;
+                height: 50vh;
             }
             
             .promo-banner {
-                max-height: 70px;
+                max-height: 60px; /* Further reduced height */
+            }
+            
+            .top-header {
+                flex-wrap: wrap;
+                padding: 6px 0;
+            }
+            
+            .logo-container {
+                order: 1;
+                flex: 0 0 50%;
+            }
+            
+            .nav-icons {
+                order: 2;
+                flex: 0 0 40%;
+                justify-content: flex-end;
+            }
+            
+            .menu-icon {
+                order: 0;
+                flex: 0 0 10%;
+            }
+            
+            .nav-links li {
+                flex: 1 0 45%;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .logo img {
+                height: 40px; /* Even smaller logo */
+            }
+            
+            .nav-icon {
+                font-size: 14px;
+            }
+            
+            .cart-count {
+                width: 14px;
+                height: 14px;
+                font-size: 9px;
             }
         }
-         footer {
-      margin-top: 4rem;
-      padding: 2rem 1rem;
-      background-color: #000;
-      color: white;
-      text-align: center;
-    }
+        
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 1rem;
+            background-color: #000;
+            color: white;
+            text-align: center;
+        }
 
-    footer a {
-      color: white;
-      margin: 0 0.5rem;
-    }
+        footer a {
+            color: white;
+            margin: 0 0.5rem;
+        }
+        
+        /* Mobile search toggle */
+        .search-toggle {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .search-toggle {
+                display: block;
+                order: 4;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            
+            .search-bar.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 10px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                z-index: 10;
+            }
+        }
     </style>
 </head>
 <body>
@@ -808,12 +913,9 @@
                 <div class="menu-icon" onclick="toggleMenu()">☰</div>
                 <div class="logo-container">
                     <div class="logo">
-                        <img src="LOG.jpeg" alt="Logo">
+                        <img src="LOG.jpeg" alt="FashionFusion Logo">
+                        FashionFusion
                     </div>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search for products...">
-                    <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="nav-icons">
                     <div class="nav-icon">
@@ -826,12 +928,19 @@
                         <i class="fas fa-shopping-bag"></i>
                         <span class="cart-count">0</span>
                     </div>
+                    <div class="search-toggle" onclick="toggleSearch()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for products...">
+                    <button><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
         <!-- Promo Banner -->
         <div class="promo-banner" id="promo-banner">
-            <img src="Mash.jpg" alt="Promo Banner">
+            <img src="Mash.jpg" alt="Summer Sale - Up to 50% Off">
         </div>
         <nav>
             <div class="container">
@@ -1026,17 +1135,30 @@
     <!-- Footer -->
     <footer>
        <p>&copy; 2025 NAMI NGIYA SPINA.</p>
-  <p>Follow us on 
-    <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
-  </p>
-  <p>Designed by 
-  <a href="https://wa.me/27768333094" target="_blank" class="developer-glow">
-    BarkerTech Innovations
-  </a>
-</p>
+        <p>Follow us on 
+            <a href="https://www.instagram.com/nami_ngiya_spina?igsh=bjhiNzlwemVqMjBj" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/16ZvKibCao/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
+        </p>
+        <p>Designed by 
+            <a href="https://wa.me/27768333094" target="_blank" class="developer-glow">
+                BarkerTech Innovations
+            </a>
+        </p>
+    </footer>
 
-                            <script>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+        
+        // Mobile search toggle
+        function toggleSearch() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.classList.toggle('active');
+        }
+        
         // Scroll behavior for header
         const header = document.getElementById('main-header');
         const promoBanner = document.getElementById('promo-banner');
@@ -1064,4 +1186,25 @@
             
             lastScroll = currentScroll;
         });
+        
+        // Cart functionality
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartCount = document.querySelector('.cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        let cartItems = 0;
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                cartItems++;
+                cartCount.textContent = cartItems;
+                
+                // Animation effect
+                cartIcon.classList.add('animate');
+                setTimeout(() => {
+                    cartIcon.classList.remove('animate');
+                }, 500);
+            });
+        });
     </script>
+</body>
+</html>
